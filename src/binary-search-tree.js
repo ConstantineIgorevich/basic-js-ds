@@ -90,33 +90,58 @@ class BinarySearchTree {
     // remove line with error and write your code here
   }
 
-  remove(data) {
-    if (!this.rootOfTree) {
-      return;
-    }
-    let currentNode = this.rootOfTree;
-    while (currentNode) {
-      if (currentNode.data === data) {
-        currentNode = null;
-        return;
-      }
-      if (currentNode.data > data) {
-        if (!currentNode.left) {
-          return;
-        }
-        currentNode = currentNode.left;
-      } else {
-        if (!currentNode.right) {
-          return;
-        }
-        currentNode = currentNode.right;
-      }
-    }
+  remove(/*data*/) {
+    // if (!this.rootOfTree) {
+    //   return;
+    // }
+    // let currentNode = this.rootOfTree;
+    // while (currentNode) {
+    //   if (currentNode.data === data) {
+    //     if(currentNode.left === null) {
+    //       if(currentNode.right === null){
+    //         currentNode = null;
+    //         return;
+    //       } else {
+    //         currentNode = currentNode.right;
+    //         return;
+    //       }
+    //     } else {
+    //       if(currentNode.right === null){
+    //         currentNode = currentNode.left;
+    //         return;
+    //       } else {
+    //         // currentNode = currentNode.right;
+    //         // return;
+    //       }
+    //     }
+    //   }
+    //   if (currentNode.data > data) {
+    //     if (!currentNode.left) {
+    //       return;
+    //     }
+    //     currentNode = currentNode.left;
+    //   } else {
+    //     if (!currentNode.right) {
+    //       return;
+    //     }
+    //     currentNode = currentNode.right;
+    //   }
+    // }
+    throw new NotImplementedError("Not implemented");
     // remove line with error and write your code here
   }
 
   min() {
-    throw new NotImplementedError("Not implemented");
+    if (!this.rootOfTree) {
+      return null;
+    }
+    let currentNode = this.rootOfTree;
+    while (currentNode) {
+      if (currentNode.data.left === null) {
+        return currentNode.data;
+      }
+        currentNode = currentNode.left;
+      }
     // remove line with error and write your code here
   }
 

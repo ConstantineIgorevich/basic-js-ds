@@ -17,23 +17,23 @@ class BinarySearchTree {
   }
 
   add(data) {
-    const NEW_NODE = new Node(data);
+    const newNode = new Node(data);
 
     if (!this.rootOfTree) {
-      this.rootOfTree = NEW_NODE;
+      this.rootOfTree = newNode;
       return;
     }
     let currentNode = this.rootOfTree;
     while (currentNode) {
-      if (currentNode.data > NEW_NODE.data) {
+      if (currentNode.data > newNode.data) {
         if (!currentNode.left) {
-          currentNode.left = NEW_NODE;
+          currentNode.left = newNode;
           return;
         }
         currentNode = currentNode.left;
       } else {
         if (!currentNode.right) {
-          currentNode.right = NEW_NODE;
+          currentNode.right = newNode;
           return;
         }
         currentNode = currentNode.right;
@@ -90,44 +90,57 @@ class BinarySearchTree {
     // remove line with error and write your code here
   }
 
-  remove(/*data*/) {
-    // if (!this.rootOfTree) {
-    //   return;
-    // }
-    // let currentNode = this.rootOfTree;
-    // while (currentNode) {
-    //   if (currentNode.data === data) {
-    //     if(currentNode.left === null) {
-    //       if(currentNode.right === null){
-    //         currentNode = null;
-    //         return;
-    //       } else {
-    //         currentNode = currentNode.right;
-    //         return;
-    //       }
-    //     } else {
-    //       if(currentNode.right === null){
-    //         currentNode = currentNode.left;
-    //         return;
-    //       } else {
-    //         // currentNode = currentNode.right;
-    //         // return;
-    //       }
-    //     }
-    //   }
-    //   if (currentNode.data > data) {
-    //     if (!currentNode.left) {
-    //       return;
-    //     }
-    //     currentNode = currentNode.left;
-    //   } else {
-    //     if (!currentNode.right) {
-    //       return;
-    //     }
-    //     currentNode = currentNode.right;
-    //   }
-    // }
-    throw new NotImplementedError("Not implemented");
+  remove(data) {
+    if (!this.rootOfTree) {
+      return;
+    } 
+    let currentNode = this.rootOfTree;
+    let parentNode = null;
+    let parentNodeSide = null;
+    while (currentNode) {
+      if (currentNode.data === data) {
+        if(currentNode.left === null) {
+          if(currentNode.right === null) {
+            parentNode[parentNodeSide] = null;
+            return;
+          } else {
+            parentNode[parentNodeSide] = currentNode.right;
+            return;
+          }
+        } else {
+          if(currentNode.right === null) {
+            parentNode[parentNodeSide] = currentNode.left;
+            return;
+          } else {
+            let currentSubNode = currentNode.right;
+            let parentSubNode = currentNode;
+            while (currentSubNode) {
+              if (currentSubNode.left === null) {
+                this.remove(currentSubNode.data);
+                currentNode.data = currentSubNode.data;
+                return;
+              }
+                parentSubNode = currentSubNode;
+                currentSubNode = currentSubNode.left;
+              }
+          }
+        }
+      } else if (currentNode.data > data) {
+        if (!currentNode.left) {
+          return;
+        }
+        parentNode = currentNode;
+        parentNodeSide = 'left';
+        currentNode = currentNode.left;
+      } else {
+        if (!currentNode.right) {
+          return;
+        }
+        parentNode = currentNode;
+        parentNodeSide = 'right';
+        currentNode = currentNode.right;
+      }
+    }
     // remove line with error and write your code here
   }
 
@@ -137,7 +150,7 @@ class BinarySearchTree {
     }
     let currentNode = this.rootOfTree;
     while (currentNode) {
-      if (currentNode.data.left === null) {
+      if (currentNode.left === null) {
         return currentNode.data;
       }
         currentNode = currentNode.left;
@@ -151,7 +164,7 @@ class BinarySearchTree {
     }
     let currentNode = this.rootOfTree;
     while (currentNode) {
-      if (currentNode.data.right === null) {
+      if (currentNode.right === null) {
         return currentNode.data;
       }
         currentNode = currentNode.right;
